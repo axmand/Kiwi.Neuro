@@ -1,4 +1,4 @@
-﻿namespace Neuro.Entity
+﻿namespace Neuro.Utils
 {
     /// <summary>
     /// reference:

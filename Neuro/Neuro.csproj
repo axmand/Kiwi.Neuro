@@ -41,16 +41,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activation\IActivationFunction.cs" />
-    <Compile Include="Entity\NP.cs" />
-    <Compile Include="Entity\Range.cs" />
+    <Compile Include="Activation\SigmoidFunction.cs" />
+    <Compile Include="Utils\GaussianWeights.cs" />
+    <Compile Include="Utils\NP.cs" />
+    <Compile Include="Utils\Range.cs" />
+    <Compile Include="Layers\ActivationLayer.cs" />
+    <Compile Include="Layers\Layer.cs" />
+    <Compile Include="Learning\BackPropagationLearning.cs" />
+    <Compile Include="Learning\ILearning.cs" />
+    <Compile Include="Networks\ActivationNetwork.cs" />
+    <Compile Include="Networks\Network.cs" />
     <Compile Include="Neurons\ActivationNeuron.cs" />
     <Compile Include="Neurons\Neuron.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Layers\" />
-    <Folder Include="Learning\" />
-    <Folder Include="Networks\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

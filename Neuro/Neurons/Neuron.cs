@@ -1,4 +1,4 @@
-﻿using Neuro.Entity;
+﻿using Neuro.Utils;
 using System;
 
 namespace Neuro.Neurons
@@ -106,7 +106,6 @@ namespace Neuro.Neurons
         public virtual void Randomize()
         {
             double d = randRange.Length;
-
             // randomize weights
             for (int i = 0; i < inputsCount; i++)
                 weights[i] = NP.NextDouble() * d + randRange.Min;
