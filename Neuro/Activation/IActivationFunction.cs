@@ -1,5 +1,8 @@
 ﻿namespace Neuro.Activation
 {
+    /// <summary>
+    /// 激活函数
+    /// </summary>
     public interface IActivationFunction
     {
         /// <summary>

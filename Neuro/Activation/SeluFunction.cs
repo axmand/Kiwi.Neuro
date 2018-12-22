@@ -12,10 +12,12 @@ namespace Neuro.Activation
         /// 
         /// </summary>
         const double alpha = 1.6732632423543772848170429916717;
+        
         /// <summary>
         /// 
         /// </summary>
         const double scale = 1.0507009873554804934193349852946;
+        
         /// <summary>
         /// dx
         /// </summary>
@@ -26,6 +28,7 @@ namespace Neuro.Activation
             double y = Function(x);
             return Derivative2(y);
         }
+        
         /// <summary>
         /// dy
         /// </summary>
@@ -38,6 +41,7 @@ namespace Neuro.Activation
             else
                 return scale * alpha * Math.Exp(y);
         }
+        
         /// <summary>
         /// y=
         /// </summary>

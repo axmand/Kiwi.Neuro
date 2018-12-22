@@ -6,18 +6,10 @@ namespace Neuro.Layers
     public class ActivationLayer:Layer
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ActivationLayer"/> class.
+        /// Initializes a new instance of the ActivationLayer class.
+        /// The new layer is randomized after it is created.
         /// </summary>
-        /// 
-        /// <param name="neuronsCount">Layer's neurons count.</param>
-        /// <param name="inputsCount">Layer's inputs count.</param>
-        /// <param name="function">Activation function of neurons of the layer.</param>
-        /// 
-        /// <remarks>The new layer is randomized (see <see cref="ActivationNeuron.Randomize"/>
-        /// method) after it is created.</remarks>
-        /// 
-        public ActivationLayer(int neuronsCount, int inputsCount, IActivationFunction function)
-            : base(neuronsCount, inputsCount)
+        public ActivationLayer(int neuronsCount, int inputsCount, IActivationFunction function) : base(neuronsCount, inputsCount)
         {
             // create each neuron
             for (int i = 0; i < neurons.Length; i++)
@@ -27,12 +19,6 @@ namespace Neuro.Layers
         /// <summary>
         /// Set new activation function for all neurons of the layer.
         /// </summary>
-        /// 
-        /// <param name="function">Activation function to set.</param>
-        /// 
-        /// <remarks><para>The methods sets new activation function for each neuron by setting
-        /// their <see cref="ActivationNeuron.ActivationFunction"/> property.</para></remarks>
-        /// 
         public void SetActivationFunction(IActivationFunction function)
         {
             for (int i = 0; i < neurons.Length; i++)

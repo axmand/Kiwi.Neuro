@@ -65,9 +65,8 @@ namespace Neuro.Neurons
             double sum = 0.0;
             // compute weighted sum of inputs
             for (int i = 0; i < weights.Length; i++)
-            {
                 sum += weights[i] * input[i];
-            }
+            // compute output
             sum += threshold;
             // local variable to avoid mutlithreaded conflicts
             double output = function.Function(sum);

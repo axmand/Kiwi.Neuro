@@ -51,11 +51,11 @@ namespace UnitTests
             //build neural network
             IActivationFunction activefunc = new SigmoidFunction();
             ActivationNetwork network = new ActivationNetwork(activefunc, 12, 24, 10, 10, 1);
-            network.Randomize();
+            //network.Randomize();
             BackPropagationLearning teacher = new BackPropagationLearning(network) { Momentum = 0.9, LearningRate = 0.1 };
             //train
             double loss = 1;
-            for (int step = 0; step < 1000; step++)
+            for (int step = 0; step < 3000; step++)
                 loss = teacher.RunEpoch(inputs, outputs);
             Assert.IsTrue(loss < 1.0);
         }

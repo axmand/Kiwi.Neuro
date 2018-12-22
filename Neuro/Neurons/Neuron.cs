@@ -39,9 +39,6 @@ namespace Neuro.Neurons
         /// <summary>
         /// Neuron's output value.
         /// </summary>
-        /// 
-        /// <remarks>The calculation way of neuron's output value is determined by inherited class.</remarks>
-        /// 
         public double Output
         {
             get { return output; }
@@ -57,14 +54,8 @@ namespace Neuro.Neurons
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Neuron"/> class.
+        /// Initializes a new instance of the Neuron class.
         /// </summary>
-        ///
-        /// <param name="inputs">Neuron's inputs count.</param>
-        /// 
-        /// <remarks>The new neuron will be randomized (see <see cref="Randomize"/> method)
-        /// after it is created.</remarks>
-        ///
         protected Neuron(int inputs)
         {
             // allocate weights
@@ -77,10 +68,6 @@ namespace Neuro.Neurons
         /// <summary>
         /// Randomize neuron.
         /// </summary>
-        /// 
-        /// <remarks>Initialize neuron's weights with random values within the range specified
-        /// by <see cref="RandRange"/>.</remarks>
-        /// 
         public virtual void Randomize()
         {
             // randomize weights
@@ -91,14 +78,6 @@ namespace Neuro.Neurons
         /// <summary>
         /// Computes output value of neuron.
         /// </summary>
-        /// 
-        /// <param name="input">Input vector.</param>
-        /// 
-        /// <returns>Returns neuron's output value.</returns>
-        /// 
-        /// <remarks>The actual neuron's output value is determined by inherited class.
-        /// The output value is also stored in <see cref="Output"/> property.</remarks>
-        /// 
         public abstract double Compute(double[] input);
     }
 }

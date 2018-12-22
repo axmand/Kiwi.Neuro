@@ -50,6 +50,5 @@ namespace Neuro.Activation
         {
             return new ReluFunction();
         }
-
     }
 }
