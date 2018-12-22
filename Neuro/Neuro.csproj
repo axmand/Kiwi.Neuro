@@ -41,7 +41,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activation\IActivationFunction.cs" />
+    <Compile Include="Activation\ReluFunction.cs" />
+    <Compile Include="Activation\SeluFunction.cs" />
     <Compile Include="Activation\SigmoidFunction.cs" />
+    <Compile Include="Loss\ILossFunction.cs" />
+    <Compile Include="Loss\SquaredFunction.cs" />
     <Compile Include="Utils\NP.cs" />
     <Compile Include="Layers\ActivationLayer.cs" />
     <Compile Include="Layers\Layer.cs" />

@@ -3,10 +3,6 @@ using Neuro.Layers;
 using Neuro.Networks;
 using Neuro.Neurons;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Neuro.Learning
 {
@@ -117,16 +113,13 @@ namespace Neuro.Learning
         {
             // compute the network's output
             network.Compute(input);
-
             // calculate network error
             double error = CalculateError(output);
-
             // calculate weights updates
             CalculateUpdates(input);
-
             // update the network
             UpdateNetwork();
-
+            // return loss
             return error;
         }
 
