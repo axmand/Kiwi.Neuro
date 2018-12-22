@@ -14,6 +14,9 @@ namespace UnitTests
 
         double[][] outputs = new double[5][];
 
+        /// <summary>
+        /// 样本的label为0 -1 适合用sigmoid 函数拟合
+        /// </summary>
         public void InitialSamples()
         {
             Random rand = new Random();
@@ -52,10 +55,8 @@ namespace UnitTests
             BackPropagationLearning teacher = new BackPropagationLearning(network) { Momentum = 0.9, LearningRate = 0.1 };
             //train
             double loss = 1;
-            for (int step = 0; step < 1000; step++)
+            for (int step = 0; step < 10000; step++)
                 loss = teacher.RunEpoch(inputs, outputs);
-            //
-            var s1 = network.Compute(inputs[0]);
             //
             Assert.IsTrue(loss < 1.0);
         }
