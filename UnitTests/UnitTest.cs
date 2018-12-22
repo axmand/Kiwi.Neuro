@@ -17,11 +17,21 @@ namespace UnitTests
         public void InitialSamples()
         {
             Random rand = new Random();
-            for (int i = 0; i < 5; i++)
-            {
-                inputs[i] = new double[3] { rand.NextDouble(), rand.NextDouble(), rand.NextDouble() };
-                outputs[i] = new double[1] { i % 2 };
-            }
+            //
+            inputs[0] = new double[12] { 0.8, 0.9, 0.7, 0.8, 0.9, 0.7, 0.8, 0.9, 0.7, 0.8, 0.9, 0.7 };
+            outputs[0] = new double[1] { 1 };
+            //
+            inputs[1] = new double[12] { 0.8, 0.7, 0.6, 0.8, 0.7, 0.6, 0.8, 0.7, 0.6, 0.8, 0.7, 0.6 };
+            outputs[1] = new double[1] { 1 };
+            //
+            inputs[2] = new double[12] { 0.6, 0.9, 0.9, 0.6, 0.9, 0.9, 0.6, 0.9, 0.9, 0.6, 0.9, 0.9 };
+            outputs[2] = new double[1] { 1 };
+            //
+            inputs[3] = new double[12] { 0.2, 0.3, 0.1, 0.2, 0.3, 0.1, 0.2, 0.3, 0.1, 0.2, 0.3, 0.1 };
+            outputs[3] = new double[1] { 0 };
+            //
+            inputs[4] = new double[12] { 0.1, 0.4, 0.2, 0.1, 0.4, 0.2, 0.1, 0.4, 0.2, 0.1, 0.4, 0.2 };
+            outputs[4] = new double[1] { 0 };
         }
 
         /// <summary>
@@ -37,13 +47,15 @@ namespace UnitTests
         {
             //build neural network
             IActivationFunction activefunc = new SigmoidFunction();
-            ActivationNetwork network = new ActivationNetwork(activefunc, 3, 2, 1);
+            ActivationNetwork network = new ActivationNetwork(activefunc, 12, 24, 10, 10, 1);
             network.Randomize();
-            BackPropagationLearning teacher = new BackPropagationLearning(network) { Momentum = 0.9, LearningRate = 0.1};
+            BackPropagationLearning teacher = new BackPropagationLearning(network) { Momentum = 0.9, LearningRate = 0.1 };
             //train
             double loss = 1;
-            for (int step = 0; step < 100; step++)
+            for (int step = 0; step < 1000; step++)
                 loss = teacher.RunEpoch(inputs, outputs);
+            //
+            var s1 = network.Compute(inputs[0]);
             //
             Assert.IsTrue(loss < 1.0);
         }

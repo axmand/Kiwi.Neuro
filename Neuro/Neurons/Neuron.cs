@@ -29,28 +29,6 @@ namespace Neuro.Neurons
         protected double output = 0;
 
         /// <summary>
-        /// Random generator range.
-        /// </summary>
-        /// 
-        /// <remarks>Sets the range of random generator. Affects initial values of neuron's weight.
-        /// Default value is [0, 1].</remarks>
-        /// 
-        protected static Range randRange = new Range(0.0f, 1.0f);
-
-        /// <summary>
-        /// Random generator range.
-        /// </summary>
-        /// 
-        /// <remarks>Sets the range of random generator. Affects initial values of neuron's weight.
-        /// Default value is [0, 1].</remarks>
-        /// 
-        public static Range RandRange
-        {
-            get { return randRange; }
-            set { randRange = value; }
-        }
-
-        /// <summary>
         /// Neuron's inputs count.
         /// </summary>
         public int InputsCount
@@ -105,10 +83,9 @@ namespace Neuro.Neurons
         /// 
         public virtual void Randomize()
         {
-            double d = randRange.Length;
             // randomize weights
             for (int i = 0; i < inputsCount; i++)
-                weights[i] = NP.NextDouble() * d + randRange.Min;
+                weights[i] = NP.RandomByNormalDistribute();
         }
 
         /// <summary>

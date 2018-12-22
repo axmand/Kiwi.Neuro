@@ -3,85 +3,45 @@
 namespace Neuro.Utils
 {
     /// <summary>
-    /// reference:
-    /// https://github.com/andrewkirillov/AForge.NET/blob/master/Sources/Core/ThreadSafeRandom.cs
-    /// </summary>
-    public sealed class ThreadSafeRandom : Random
-    {
-        private readonly object sync = new object();
-
-        /// <summary>
-        /// Initializes a new instance of the ThreadSafeRandom
-        /// </summary>
-        public ThreadSafeRandom() : base() { }
-
-        /// <summary>
-        /// A number used to calculate a starting value for the pseudo-random number sequence.
-        /// If a negative number is specified, the absolute value of the number is used.
-        /// </summary>
-        /// <param name="seed"></param>
-        public ThreadSafeRandom(int seed) : base(seed) { }
-
-        /// <summary>
-        /// Returns a nonnegative random number.
-        /// </summary>
-        /// <returns></returns>
-        public override int Next()
-        {
-            lock (sync) return base.Next();
-        }
-
-        /// <summary>
-        /// Returns a nonnegative random number less than the specified maximum.
-        /// </summary>
-        /// <param name="maxValue"></param>
-        /// <returns></returns>
-        public override int Next(int maxValue)
-        {
-            lock (sync) return base.Next(maxValue);
-        }
-
-        /// <summary>
-        /// Returns a random number within a specified range.
-        /// </summary>
-        /// <param name="minValue"></param>
-        /// <param name="maxValue"></param>
-        /// <returns></returns>
-        public override int Next(int minValue, int maxValue)
-        {
-            lock (sync) return base.Next(minValue, maxValue);
-        }
-
-        /// <summary>
-        /// Fills the elements of a specified array of bytes with random numbers.
-        /// </summary>
-        /// <param name="buffer"></param>
-        public override void NextBytes(byte[] buffer)
-        {
-            lock (sync) base.NextBytes(buffer);
-        }
-
-        /// <summary>
-        /// Returns a random number between 0.0 and 1.0.
-        /// </summary>
-        /// <returns></returns>
-        public override double NextDouble()
-        {
-            lock (sync) return base.NextDouble();
-        }
-
-    }
-
-    /// <summary>
     /// 模拟np操作库，实现数据处理相关功能
+    /// @author yellow 
+    /// @date 2018/12/22
     /// </summary>
     public class NP
     {
-        static ThreadSafeRandom _random = new ThreadSafeRandom();
 
-        internal static double NextDouble()
+        /// <summary>
+        /// 基于hash的random，比系统自带的random更符合随机特性
+        /// </summary>
+        /// <returns></returns>
+        public static double Random()
         {
-            return _random.NextDouble();
+            return new Random(Guid.NewGuid().GetHashCode()).NextDouble();
+        }
+
+        /// <summary>
+        /// 生成符合正太分布的随机数，默认e =0, d=1
+        /// </summary>
+        /// <returns></returns>
+        public static double RandomByNormalDistribute()
+        {
+            double u1 = Random();
+            double u2 = Random();
+            return NormalDistribute(u1,u2);
+        }
+
+        /// <summary>
+        /// 标准正态分部期望0，方差1
+        /// </summary>
+        /// <param name="u1"></param>
+        /// <param name="u2"></param>
+        /// <param name="e">期望，</param>
+        /// <param name="d">方差</param>
+        /// <returns></returns>
+        public static double NormalDistribute(double u1, double u2, double e = 0, double d = 1)
+        {
+            double result = e + Math.Sqrt(d) * Math.Sqrt((-2) * (Math.Log(u1) / Math.Log(Math.E))) * Math.Cos(2 * Math.PI * u2);
+            return result;
         }
 
     }

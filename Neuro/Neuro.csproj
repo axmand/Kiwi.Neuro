@@ -42,9 +42,7 @@
   <ItemGroup>
     <Compile Include="Activation\IActivationFunction.cs" />
     <Compile Include="Activation\SigmoidFunction.cs" />
-    <Compile Include="Utils\GaussianWeights.cs" />
     <Compile Include="Utils\NP.cs" />
-    <Compile Include="Utils\Range.cs" />
     <Compile Include="Layers\ActivationLayer.cs" />
     <Compile Include="Layers\Layer.cs" />
     <Compile Include="Learning\BackPropagationLearning.cs" />

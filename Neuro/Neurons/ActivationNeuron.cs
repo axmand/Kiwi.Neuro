@@ -50,7 +50,7 @@ namespace Neuro.Neurons
             // randomize weights
             base.Randomize();
             // randomize threshold
-            threshold = NP.NextDouble() * (randRange.Length) + randRange.Min;
+            threshold = NP.RandomByNormalDistribute();
         }
 
         /// <summary>
