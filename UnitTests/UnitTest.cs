@@ -55,9 +55,8 @@ namespace UnitTests
             BackPropagationLearning teacher = new BackPropagationLearning(network) { Momentum = 0.9, LearningRate = 0.1 };
             //train
             double loss = 1;
-            for (int step = 0; step < 10000; step++)
+            for (int step = 0; step < 1000; step++)
                 loss = teacher.RunEpoch(inputs, outputs);
-            //
             Assert.IsTrue(loss < 1.0);
         }
     }
