@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Neuro.Abstract;
+using System;
 
 namespace Neuro.Activation
 {
@@ -54,5 +55,6 @@ namespace Neuro.Activation
             else
                 return scale * alpha * (Math.Exp(x) - 1);
         }
+
     }
 }

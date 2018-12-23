@@ -1,4 +1,4 @@
-﻿using Neuro.Activation;
+﻿using Neuro.Abstract;
 using Neuro.Layers;
 using Neuro.Networks;
 using Neuro.Neurons;
@@ -73,7 +73,7 @@ namespace Neuro.Learning
             // initialize errors and deltas arrays for each layer
             for (int i = 0; i < network.Layers.Length; i++)
             {
-                Layer layer = network.Layers[i];
+                IActivationLayer layer = network.Layers[i];
                 neuronErrors[i] = new double[layer.Neurons.Length];
                 weightsUpdates[i] = new double[layer.Neurons.Length][];
                 thresholdsUpdates[i] = new double[layer.Neurons.Length];
@@ -124,7 +124,7 @@ namespace Neuro.Learning
         private double CalculateError(double[] desiredOutput)
         {
             // current and the next layers
-            Layer layer, layerNext;
+            ActivationLayer layer, layerNext;
             // current and the next errors arrays
             double[] errors, errorsNext;
             // error values
@@ -177,9 +177,9 @@ namespace Neuro.Learning
         private void CalculateUpdates(double[] input)
         {
             // current neuron
-            Neuron neuron;
+            ActivationNeuron neuron;
             // current and previous layers
-            Layer layer, layerPrev;
+            ActivationLayer layer, layerPrev;
             // layer's weights updates
             double[][] layerWeightsUpdates;
             // layer's thresholds updates
@@ -249,7 +249,7 @@ namespace Neuro.Learning
             // current neuron
             ActivationNeuron neuron;
             // current layer
-            Layer layer;
+            ActivationLayer layer;
             // layer's weights updates
             double[][] layerWeightsUpdates;
             // layer's thresholds updates

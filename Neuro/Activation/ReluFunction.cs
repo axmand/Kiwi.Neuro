@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Neuro.Abstract;
+using System;
 
 namespace Neuro.Activation
 {
@@ -50,5 +51,6 @@ namespace Neuro.Activation
         {
             return new ReluFunction();
         }
+
     }
 }

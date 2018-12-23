@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Neuro.Abstract;
+using System;
 
 namespace Neuro.Activation
 {
@@ -21,7 +22,6 @@ namespace Neuro.Activation
         {
             Alpha = alpha;
         }
-
 
         /// <summary>
         /// Calculates function value.
@@ -56,5 +56,6 @@ namespace Neuro.Activation
         {
             return new SigmoidFunction(Alpha);
         }
+
     }
 }

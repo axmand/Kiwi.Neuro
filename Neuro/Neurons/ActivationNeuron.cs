@@ -1,20 +1,81 @@
-﻿using Neuro.Activation;
+﻿using Neuro.Abstract;
 using Neuro.Utils;
 using System;
 
 namespace Neuro.Neurons
 {
-    public class ActivationNeuron : Neuron
+    public class ActivationNeuron
     {
+
+        /// <summary>
+        /// Neuron's inputs count.
+        /// </summary>
+        protected int inputsCount = 0;
+
+        /// <summary>
+        /// Nouron's wieghts.
+        /// </summary>
+        protected double[] weights = null;
+
+        /// <summary>
+        /// Neuron's output value.
+        /// </summary>
+        protected double output = 0;
+
+        /// <summary>
+        /// Neuron's inputs count.
+        /// </summary>
+        public int InputsCount
+        {
+            get { return inputsCount; }
+        }
+
+        /// <summary>
+        /// Neuron's output value.
+        /// </summary>
+        public double Output
+        {
+            get { return output; }
+        }
+
+        /// <summary>
+        /// Neuron's weights.
+        /// </summary>
+        public double[] Weights
+        {
+            get { return weights; }
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the Neuron class.
+        /// </summary>
+        public ActivationNeuron(int inputs,IActivationFunction function)
+        {
+            // allocate weights
+            inputsCount = Math.Max(1, inputs);
+            weights = new double[inputsCount];
+            //set actviation function
+            ActivationFunction = function;
+            // randomize the neuron
+            Randomize();
+        }
+
+        /// <summary>
+        /// Randomize neuron.
+        /// </summary>
+        public void Randomize()
+        {
+            // randomize weights
+            for (int i = 0; i < inputsCount; i++)
+                weights[i] = NP.RandomByNormalDistribute();
+            //
+            threshold = NP.RandomByNormalDistribute();
+        }
+
         /// <summary>
         /// Threshold value.
         /// </summary>
         protected double threshold = 0.0;
-
-        /// <summary>
-        /// Activation function.
-        /// </summary>
-        protected IActivationFunction function = null;
 
         /// <summary>
         /// Threshold value.
@@ -28,35 +89,12 @@ namespace Neuro.Neurons
         /// <summary>
         /// Neuron's activation function.
         /// </summary>
-        public IActivationFunction ActivationFunction
-        {
-            get { return function; }
-            set { function = value; }
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ActivationNeuron"/> class.
-        /// </summary>
-        public ActivationNeuron(int inputs, IActivationFunction function): base(inputs)
-        {
-            this.function = function;
-        }
-
-        /// <summary>
-        /// Randomize neuron.
-        /// </summary>
-        public override void Randomize()
-        {
-            // randomize weights
-            base.Randomize();
-            // randomize threshold
-            threshold = NP.RandomByNormalDistribute();
-        }
+        public IActivationFunction ActivationFunction { get; set; }
 
         /// <summary>
         /// Computes output value of neuron.
         /// </summary>
-        public override double Compute(double[] input)
+        public double Compute(double[] input)
         {
             // check for corrent input vector
             if (input.Length != inputsCount)
@@ -69,10 +107,11 @@ namespace Neuro.Neurons
             // compute output
             sum += threshold;
             // local variable to avoid mutlithreaded conflicts
-            double output = function.Function(sum);
+            double output = ActivationFunction.Function(sum);
             // assign output property as well (works correctly for single threaded usage)
             this.output = output;
             return output;
         }
+
     }
 }

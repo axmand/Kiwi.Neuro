@@ -40,22 +40,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Activation\IActivationFunction.cs" />
+    <Compile Include="Abstract\ILayer.cs" />
+    <Compile Include="Abstract\IActivationFunction.cs" />
+    <Compile Include="Abstract\INetwork.cs" />
+    <Compile Include="Abstract\INeuron.cs" />
     <Compile Include="Activation\ReluFunction.cs" />
     <Compile Include="Activation\SeluFunction.cs" />
     <Compile Include="Activation\SigmoidFunction.cs" />
-    <Compile Include="Loss\ILossFunction.cs" />
+    <Compile Include="Abstract\ILossFunction.cs" />
     <Compile Include="Loss\SquaredFunction.cs" />
-    <Compile Include="Networks\RecurrentNetwork.cs" />
     <Compile Include="Utils\NP.cs" />
     <Compile Include="Layers\ActivationLayer.cs" />
-    <Compile Include="Layers\Layer.cs" />
     <Compile Include="Learning\BackPropagationLearning.cs" />
-    <Compile Include="Learning\ILearning.cs" />
+    <Compile Include="Abstract\ILearning.cs" />
     <Compile Include="Networks\ActivationNetwork.cs" />
-    <Compile Include="Networks\Network.cs" />
     <Compile Include="Neurons\ActivationNeuron.cs" />
-    <Compile Include="Neurons\Neuron.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

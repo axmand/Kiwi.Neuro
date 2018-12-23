@@ -1,4 +1,4 @@
-﻿namespace Neuro.Activation
+﻿namespace Neuro.Abstract
 {
     /// <summary>
     /// 激活函数

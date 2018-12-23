@@ -1,8 +1,9 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Neuro.Abstract;
 using Neuro.Activation;
 using Neuro.Learning;
 using Neuro.Networks;
+using System;
 
 namespace UnitTests
 {
