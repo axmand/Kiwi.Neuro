@@ -7,7 +7,7 @@ using Neuro.Networks;
 namespace UnitTests
 {
     [TestClass]
-    public class UnitTest
+    public class Network_DeepNerual
     {
 
         double[][] inputs = new double[5][];
@@ -40,7 +40,7 @@ namespace UnitTests
         /// <summary>
         /// initialization samples
         /// </summary>
-        public UnitTest()
+        public Network_DeepNerual()
         {
             InitialSamples();
         }
@@ -59,5 +59,6 @@ namespace UnitTests
                 loss = teacher.RunEpoch(inputs, outputs);
             Assert.IsTrue(loss < 1.0);
         }
+
     }
 }

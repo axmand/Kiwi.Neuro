@@ -44,7 +44,6 @@
     <Compile Include="Activation\ReluFunction.cs" />
     <Compile Include="Activation\SeluFunction.cs" />
     <Compile Include="Activation\SigmoidFunction.cs" />
-    <Compile Include="Layers\RecurrentLayer.cs" />
     <Compile Include="Loss\ILossFunction.cs" />
     <Compile Include="Loss\SquaredFunction.cs" />
     <Compile Include="Networks\RecurrentNetwork.cs" />
