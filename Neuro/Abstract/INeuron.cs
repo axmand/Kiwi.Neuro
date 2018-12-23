@@ -6,7 +6,21 @@ using System.Threading.Tasks;
 
 namespace Neuro.Abstract
 {
-    class INeuron
+    public interface INeuron
     {
     }
+
+    public interface IActivationNeuron : INeuron
+    {
+
+    }
+
+    /// <summary>
+    /// recurrentNeuron
+    /// </summary>
+    public interface IRecurrentNeuron: INeuron
+    {
+
+    }
+
 }

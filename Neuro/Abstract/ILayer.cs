@@ -13,7 +13,14 @@ namespace Neuro.Abstract
 
     public interface IActivationLayer : ILayer
     {
+        /// <summary>
+        /// neurons collection
+        /// </summary>
         ActivationNeuron[] Neurons { get; }
+
+        /// <summary>
+        /// input vector length
+        /// </summary>
         int InputsCount {get;}
     }
 

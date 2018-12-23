@@ -48,7 +48,9 @@
     <Compile Include="Activation\SeluFunction.cs" />
     <Compile Include="Activation\SigmoidFunction.cs" />
     <Compile Include="Abstract\ILossFunction.cs" />
+    <Compile Include="Layers\RecurrentLayer.cs" />
     <Compile Include="Loss\SquaredFunction.cs" />
+    <Compile Include="Neurons\RecurrentNeuron.cs" />
     <Compile Include="Utils\NP.cs" />
     <Compile Include="Layers\ActivationLayer.cs" />
     <Compile Include="Learning\BackPropagationLearning.cs" />
