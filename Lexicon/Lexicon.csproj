@@ -58,6 +58,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entity\HalfmanTree.cs" />
+    <Compile Include="Entity\OnehotEncode.cs" />
+    <Compile Include="Extend\StringExtend.cs" />
     <Compile Include="Lexicon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entity\Vocabulary.cs" />

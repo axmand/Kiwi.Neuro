@@ -69,7 +69,7 @@ namespace Lexicon
         public int CodeLen { get; set; }
 
         /// <summary>
-        /// 单词位置
+        /// 单词位置,即编码
         /// </summary>
         public int[] Point { get; set; }
 

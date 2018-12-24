@@ -1,21 +1,35 @@
 ﻿using JiebaNet.Segmenter;
+using Lexicon.Extend;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace Lexicon
 {
+
+    /// <summary>
+    /// 编码方式
+    /// </summary>
+    public enum EncodeScheme
+    {
+        /// <summary>
+        /// halfman方式，不等长
+        /// </summary>
+        Halfman = 1,
+        /// <summary>
+        /// onehot，等长
+        /// </summary>
+        Onehot = 2
+    }
+
+
     /// <summary>
     /// 词库
     /// </summary>
     public class Lexicon
     {
-        /// <summary>
-        /// halfman树
-        /// </summary>
-        VocabularyHalfmanTree _halfmanTree;
-
         /// <summary>
         /// 单词字母字符串长度上限
         /// </summary>
@@ -65,10 +79,19 @@ namespace Lexicon
         public Vocabulary[] VocaArray { get { return _voca_array; } }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public Dictionary<string, int> DictIndex { get; private set; } = new Dictionary<string, int>();
+
+        /// <summary>
         /// 使用结巴分词
         /// </summary>
         JiebaSegmenter _segmenter;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="segmenter"></param>
         public Lexicon(JiebaSegmenter segmenter)
         {
             //分词器
@@ -195,8 +218,17 @@ namespace Lexicon
         /// </summary>
         public void UpdateHalfmanCode()
         {
-            _halfmanTree = new VocabularyHalfmanTree(this);
-            _halfmanTree.BuildOrUpdate();
+            VocabularyHalfmanTree halfmanTree = new VocabularyHalfmanTree(this);
+            halfmanTree.BuildOrUpdate();
+        }
+
+        /// <summary>
+        /// 执行onehot编码
+        /// </summary>
+        public void UpdateOnehotCode()
+        {
+            OnehotEncode onehotEncode = new OnehotEncode(this);
+            onehotEncode.BuildOrUpdate();
         }
 
         /// <summary>
@@ -221,7 +253,7 @@ namespace Lexicon
             {
                 Regex regex = new Regex("\\s");
                 string line;
-                while (!string.IsNullOrEmpty((line = sr.ReadLine())))
+                while (!string.IsNullOrEmpty((line = sr.ReadLine().ClearPunctuation())))
                 {
                     string[] vals = regex.Split(line);
                     if (vals.Length == 2)
@@ -236,23 +268,26 @@ namespace Lexicon
             lexicon.UpdateHalfmanCode();
             return lexicon;
         }
+
         /// <summary>
         /// 从原始文本文件中分析词句
         /// </summary>
         /// <param name="vocabularyFile"></param>
         /// <returns></returns>
-        public static Lexicon FromVocabularyFile(string vocabularyFile)
+        public static Lexicon FromVocabularyFile(string vocabularyFile, EncodeScheme encode = EncodeScheme.Halfman)
         {
             JiebaSegmenter segmenter = new JiebaSegmenter();
             Lexicon lexicon = new Lexicon(segmenter);
-            lexicon.AddVocabulary("</s>");
             //读取文本构建词库
             using (StreamReader sr = new StreamReader(vocabularyFile))
             {
                 string line;
-                while (!string.IsNullOrEmpty((line = sr.ReadLine())))
+                while (!sr.EndOfStream)
                 {
-                    if (sr.EndOfStream) break;
+                    line = sr.ReadLine().ClearPunctuation();
+                    if (string.IsNullOrEmpty(line) || string.IsNullOrWhiteSpace(line))
+                        continue;
+                    //sgement
                     string[] words = lexicon.Sgement(line);
                     Array.ForEach(words, word =>
                     {
@@ -273,8 +308,13 @@ namespace Lexicon
                 //2. 排序
                 lexicon.SortVocabulary();
             }
+            //应用halfman编码
+            if (encode == EncodeScheme.Halfman)
+                lexicon.UpdateHalfmanCode();
+            //应用one-hot编码
+            else if (encode == EncodeScheme.Onehot)
+                lexicon.UpdateOnehotCode();
             //
-            lexicon.UpdateHalfmanCode();
             return lexicon;
         }
 
