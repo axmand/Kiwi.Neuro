@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Neuro", "Neuro\Neuro.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{B761927C-693A-4F7D-9C35-7701953B6F3E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lexicon", "Lexicon\Lexicon.csproj", "{6022FAE0-CF4A-4A86-8EE3-2C3FAFE113CA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{B761927C-693A-4F7D-9C35-7701953B6F3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B761927C-693A-4F7D-9C35-7701953B6F3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B761927C-693A-4F7D-9C35-7701953B6F3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6022FAE0-CF4A-4A86-8EE3-2C3FAFE113CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6022FAE0-CF4A-4A86-8EE3-2C3FAFE113CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6022FAE0-CF4A-4A86-8EE3-2C3FAFE113CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6022FAE0-CF4A-4A86-8EE3-2C3FAFE113CA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

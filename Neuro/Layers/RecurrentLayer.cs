@@ -14,7 +14,7 @@ namespace Neuro.Layers
         /// <summary>
         /// Layer's neurons count.
         /// </summary>
-        public int NeuronsCount { get; } = 0;
+        public int Size_Output { get; } = 0;
 
         /// <summary>
         /// Layer's output vector.
@@ -24,7 +24,12 @@ namespace Neuro.Layers
         /// <summary>
         /// Layer's inputs count.
         /// </summary>
-        public int InputsCount { get; } = 0;
+        public int Size_Input { get; } = 0;
+
+        /// <summary>
+        /// Layer's Size_Total count.
+        /// </summary>
+        public int Size_Total { get; } = 0;
 
         /// <summary>
         /// Layer's neurons.
@@ -44,43 +49,23 @@ namespace Neuro.Layers
         /// Compute output vector of the layer.
         /// forward
         /// </summary>
-        public double[] Compute(string rawText)
+        public double[][] Compute(double[][] buffer)
         {
-            //convert to target-context input data
-            double[][] buffer = FillTextBuffer(rawText);
+            //outputs
+            double[][] output = new double[BufferSize][];
             //neurons
             Neurons[0] = Neurons[BufferSize - 1].Clone() as RecurrentNeuron;
             //
             for(int t = 1; t < BufferSize; t++)
             {
                 buffer[t].CopyTo(vcx[t], 0);
-                Neurons[t - 1].Output.CopyTo(vcx[t], InputsCount);
+                Neurons[t - 1].Output.CopyTo(vcx[t], Size_Input);
                 double[] raw_vcx_state = vcx[t];
                 //calcute outputs
+                output[t] = Neurons[t].Compute(raw_vcx_state);
             }
-        
-            
-            
-            // local variable to avoid mutlithread conflicts
-            double[] output = new double[NeuronsCount];
-            // compute each neuron
-            for (int i = 0; i < Neurons.Length; i++)
-                output[i] = Neurons[i].Compute(null);
-            // assign output property as well (works correctly for single threaded usage)
-            this.output = output;
             return output;
         }
-
-        /// <summary>
-        /// returen the alaysised
-        /// </summary>
-        /// <param name="rawText"></param>
-        /// <returns></returns>
-        private double[][] FillTextBuffer(string rawText)
-        {
-            return null;
-        }
-        
 
         /// <summary>
         /// Randomize neurons of the layer.
@@ -95,19 +80,24 @@ namespace Neuro.Layers
         /// Initializes a new instance of the ActivationLayer class.
         /// The new layer is randomized after it is created.
         /// </summary>
-        public RecurrentLayer(int neuronsCount, int inputsCount, IActivationFunction function)
+        public RecurrentLayer(int size_input, int size_output, IActivationFunction function)
         {
             // the input count
-            InputsCount = Math.Max(1, inputsCount);
+            Size_Input = Math.Max(1, size_input);
             // create layer output neurons count
-            NeuronsCount = Math.Max(1, neuronsCount);
-            // create collection of neurons
-            Neurons = new RecurrentNeuron[NeuronsCount];
+            Size_Output = Math.Max(1, size_output);
+            //
+            Size_Total = Size_Input + Size_Output;
+            // 神经元个数，与size_output一致
+            Neurons = new RecurrentNeuron[Size_Output];
             //
             vcx = new double[BufferSize][];
             // create each neuron
             for (int i = 0; i < Neurons.Length; i++)
-                Neurons[i] = new RecurrentNeuron(inputsCount, function);
+                Neurons[i] = new RecurrentNeuron(Size_Input, Size_Total, function);
+            // 神经元互通信息
+            for (int i = 0; i < Neurons.Length; i++)
+                Neurons[i].BrotherNeurons = Neurons;
         }
 
         /// <summary>

@@ -4,12 +4,23 @@ using System;
 
 namespace Neuro.Neurons
 {
-    public  class RecurrentNeuron: IRecurrentNeuron,ICloneable
+    public class RecurrentNeuron : IRecurrentNeuron, ICloneable
     {
+        /// <summary>
+        /// rnn是神经元需要在每个神经元里，记录其他神经元信息
+        /// </summary>
+        public RecurrentNeuron[] BrotherNeurons { get; set; }
+
         /// <summary>
         /// Neuron's inputs count.
         /// </summary>
         public int InputsCount { get; private set; }
+
+        /// <summary>
+        /// w权重初始化长度
+        /// 因为输入的长度是全内容，所以w权重初始化计算方式不一样
+        /// </summary>
+        public int TotalCount { get; private set; }
 
         /// <summary>
         /// Neuron's output value.
@@ -23,13 +34,16 @@ namespace Neuro.Neurons
 
         /// <summary>
         /// Initializes a new instance of the Neuron class.
+        /// warning: input = size_total
         /// </summary>
-        public RecurrentNeuron(int inputs, IActivationFunction function)
+        public RecurrentNeuron(int inputsCount, int totalCount, IActivationFunction function)
         {
             // allocate weights
-            InputsCount = Math.Max(1, inputs);
+            InputsCount = Math.Max(1, inputsCount);
+            // total count
+            TotalCount = Math.Max(1, totalCount);
             // new weights
-            Weights = new double[InputsCount];
+            Weights = new double[TotalCount];
             //set actviation function
             ActivationFunction = function;
             // randomize the neuron
@@ -42,7 +56,7 @@ namespace Neuro.Neurons
         public void Randomize()
         {
             //init w
-            for (int i = 0; i < InputsCount; i++)
+            for (int i = 0; i < TotalCount; i++)
                 Weights[i] = NP.RandomByNormalDistribute();
             //init b
             Threshold = NP.RandomByNormalDistribute();
@@ -61,23 +75,18 @@ namespace Neuro.Neurons
         /// <summary>
         /// Computes output value of neuron.
         /// </summary>
-        public double Compute(double[] input)
+        public double[] Compute(double[] input)
         {
-            // check for corrent input vector
-            if (input.Length != InputsCount)
-                throw new ArgumentException("Wrong length of the input vector.");
-            // initial sum value
-            double sum = 0.0;
-            // compute weighted sum of inputs
-            for (int i = 0; i < Weights.Length; i++)
-                sum += Weights[i] * input[i];
-            // compute output
-            sum += Threshold;
-            // local variable to avoid mutlithreaded conflicts
-            double output = ActivationFunction.Function(sum);
-            // assign output property as well (works correctly for single threaded usage)
-            //Output = output;
-            return output;
+            Output = new double[InputsCount];
+            for (int t = 0; t < InputsCount; t++)
+            {
+                RecurrentNeuron neuron = BrotherNeurons[t];
+                double sum = neuron.Threshold;
+                for (int i = 0; i < TotalCount; i++)
+                    sum += neuron.Weights[i] * input[i];
+                Output[t] = ActivationFunction.Function(sum);
+            }
+            return Output;
         }
 
         /// <summary>
@@ -86,10 +95,12 @@ namespace Neuro.Neurons
         /// <returns></returns>
         public object Clone()
         {
-            RecurrentNeuron neuron = new RecurrentNeuron(InputsCount,ActivationFunction);
-            neuron.Weights = Weights;
-            neuron.Threshold = Threshold;
-            neuron.Output = Output;
+            RecurrentNeuron neuron = new RecurrentNeuron(InputsCount, TotalCount, ActivationFunction)
+            {
+                Weights = Weights,
+                Threshold = Threshold,
+                Output = Output
+            };
             return neuron;
         }
 
