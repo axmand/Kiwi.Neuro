@@ -58,6 +58,7 @@ namespace Neuro.Layers
             //
             for(int t = 1; t < BufferSize; t++)
             {
+                vcx[t] = new double[Size_Total];
                 buffer[t].CopyTo(vcx[t], 0);
                 Neurons[t - 1].Output.CopyTo(vcx[t], Size_Input);
                 double[] raw_vcx_state = vcx[t];
@@ -94,7 +95,7 @@ namespace Neuro.Layers
             vcx = new double[BufferSize][];
             // create each neuron
             for (int i = 0; i < Neurons.Length; i++)
-                Neurons[i] = new RecurrentNeuron(Size_Input, Size_Total, function);
+                Neurons[i] = new RecurrentNeuron(Size_Output, Size_Total, function);
             // 神经元互通信息
             for (int i = 0; i < Neurons.Length; i++)
                 Neurons[i].BrotherNeurons = Neurons;

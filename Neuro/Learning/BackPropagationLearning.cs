@@ -6,6 +6,9 @@ using System;
 
 namespace Neuro.Learning
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class BackPropagationLearning: ILearning
     {
         // network to teach
@@ -15,12 +18,12 @@ namespace Neuro.Learning
         // momentum
         private double momentum = 0.0;
 
-        // neuron's errors
-        private double[][] neuronErrors = null;
+        // neuron's loss
+        private readonly double[][] neuronLoss = null;
         // weight's updates
-        private double[][][] weightsUpdates = null;
+        private readonly double[][][] weightsUpdates = null;
         // threshold's updates
-        private double[][] thresholdsUpdates = null;
+        private readonly double[][] biasesUpdates = null;
 
         /// <summary>
         /// Learning rate, [0, 1].
@@ -67,16 +70,17 @@ namespace Neuro.Learning
         {
             this.network = network;
             // create error and deltas arrays
-            neuronErrors = new double[network.Layers.Length][];
+            neuronLoss = new double[network.Layers.
+                ][];
             weightsUpdates = new double[network.Layers.Length][][];
-            thresholdsUpdates = new double[network.Layers.Length][];
+            biasesUpdates = new double[network.Layers.Length][];
             // initialize errors and deltas arrays for each layer
             for (int i = 0; i < network.Layers.Length; i++)
             {
                 IActivationLayer layer = network.Layers[i];
-                neuronErrors[i] = new double[layer.Neurons.Length];
+                neuronLoss[i] = new double[layer.Neurons.Length];
                 weightsUpdates[i] = new double[layer.Neurons.Length][];
-                thresholdsUpdates[i] = new double[layer.Neurons.Length];
+                biasesUpdates[i] = new double[layer.Neurons.Length];
                 // for each neuron
                 for (int j = 0; j < weightsUpdates[i].Length; j++)
                     weightsUpdates[i][j] = new double[layer.InputsCount];
@@ -137,7 +141,7 @@ namespace Neuro.Learning
             IActivationFunction function = (network.Layers[0].Neurons[0] as ActivationNeuron).ActivationFunction;
             // calculate error values for the last layer first
             layer = network.Layers[layersCount - 1];
-            errors = neuronErrors[layersCount - 1];
+            errors = neuronLoss[layersCount - 1];
             for (int i = 0; i < layer.Neurons.Length; i++)
             {
                 output = layer.Neurons[i].Output;
@@ -153,8 +157,8 @@ namespace Neuro.Learning
             {
                 layer = network.Layers[j];
                 layerNext = network.Layers[j + 1];
-                errors = neuronErrors[j];
-                errorsNext = neuronErrors[j + 1];
+                errors = neuronLoss[j];
+                errorsNext = neuronLoss[j + 1];
                 // for all neurons of the layer
                 for (int i = 0; i < layer.Neurons.Length; i++)
                 {
@@ -192,9 +196,9 @@ namespace Neuro.Learning
             // double		error;
             // 1 - calculate updates for the first layer
             layer = network.Layers[0];
-            errors = neuronErrors[0];
+            errors = neuronLoss[0];
             layerWeightsUpdates = weightsUpdates[0];
-            layerThresholdUpdates = thresholdsUpdates[0];
+            layerThresholdUpdates = biasesUpdates[0];
             // cache for frequently used values
             double cachedMomentum = learningRate * momentum;
             double cached1mMomentum = learningRate * (1 - momentum);
@@ -219,9 +223,9 @@ namespace Neuro.Learning
             {
                 layerPrev = network.Layers[k - 1];
                 layer = network.Layers[k];
-                errors = neuronErrors[k];
+                errors = neuronLoss[k];
                 layerWeightsUpdates = weightsUpdates[k];
-                layerThresholdUpdates = thresholdsUpdates[k];
+                layerThresholdUpdates = biasesUpdates[k];
                 // for each neuron of the layer
                 for (int i = 0; i < layer.Neurons.Length; i++)
                 {
@@ -261,7 +265,7 @@ namespace Neuro.Learning
             {
                 layer = network.Layers[i];
                 layerWeightsUpdates = weightsUpdates[i];
-                layerThresholdUpdates = thresholdsUpdates[i];
+                layerThresholdUpdates = biasesUpdates[i];
                 // for each neuron of the layer
                 for (int j = 0; j < layer.Neurons.Length; j++)
                 {

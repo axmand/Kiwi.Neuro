@@ -46,6 +46,8 @@ namespace Neuro.Neurons
             Weights = new double[TotalCount];
             //set actviation function
             ActivationFunction = function;
+            //output
+            Output = new double[InputsCount];
             // randomize the neuron
             Randomize();
         }

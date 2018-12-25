@@ -30,8 +30,6 @@ namespace UnitTests
             //form raw vocabulary file
             Lexicon.Lexicon lexicon = Lexicon.Lexicon.FromVocabularyFile(vocabularyFullFilename,Lexicon.EncodeScheme.Onehot);
             //每次学习文字的长度
-            
-            //
             using(StreamReader sr = new StreamReader(vocabularyFullFilename))
             {
                 string rawText = "";

@@ -9,6 +9,7 @@ namespace Neuro.Abstract
 {
     public interface ILayer
     {
+
     }
 
     public interface IActivationLayer : ILayer
