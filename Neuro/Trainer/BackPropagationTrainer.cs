@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Neuro.Abstract
+namespace Neuro.Trainer
 {
-    public interface INetwork
+    public class BackPropagationTrainer
     {
-        
     }
 }

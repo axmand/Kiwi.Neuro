@@ -70,8 +70,7 @@ namespace Neuro.Learning
         {
             this.network = network;
             // create error and deltas arrays
-            neuronLoss = new double[network.Layers.
-                ][];
+            neuronLoss = new double[network.Layers.Length][];
             weightsUpdates = new double[network.Layers.Length][][];
             biasesUpdates = new double[network.Layers.Length][];
             // initialize errors and deltas arrays for each layer
@@ -138,7 +137,7 @@ namespace Neuro.Learning
             // layers count
             int layersCount = network.Layers.Length;
             // assume, that all neurons of the network have the same activation function
-            IActivationFunction function = (network.Layers[0].Neurons[0] as ActivationNeuron).ActivationFunction;
+            IActivation function = (network.Layers[0].Neurons[0] as ActivationNeuron).ActivationFunction;
             // calculate error values for the last layer first
             layer = network.Layers[layersCount - 1];
             errors = neuronLoss[layersCount - 1];

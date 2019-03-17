@@ -7,7 +7,7 @@ namespace Neuro.Activation
     ///  Selu激活函数
     /// </summary>
     [Serializable]
-    public class SeluFunction : IActivationFunction
+    public class SeluFunction : IActivation
     {
         /// <summary>
         /// 

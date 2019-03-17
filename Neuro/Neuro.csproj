@@ -40,8 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abstract\ILayer.cs" />
-    <Compile Include="Abstract\IActivationFunction.cs" />
+    <Compile Include="Layers\ILayer.cs" />
+    <Compile Include="Activation\IActivation.cs" />
     <Compile Include="Abstract\INetwork.cs" />
     <Compile Include="Abstract\INeuron.cs" />
     <Compile Include="Activation\ReluFunction.cs" />
@@ -51,9 +51,11 @@
     <Compile Include="Layers\RecurrentLayer.cs" />
     <Compile Include="Loss\SquaredFunction.cs" />
     <Compile Include="Neurons\RecurrentNeuron.cs" />
+    <Compile Include="Trainer\BackPropagationTrainer.cs" />
+    <Compile Include="Utils\Matrix.cs" />
     <Compile Include="Utils\NP.cs" />
     <Compile Include="Layers\ActivationLayer.cs" />
-    <Compile Include="Learning\BackPropagationLearning.cs" />
+    <Compile Include="Trainer\BackPropagationLearning.cs" />
     <Compile Include="Abstract\ILearning.cs" />
     <Compile Include="Networks\ActivationNetwork.cs" />
     <Compile Include="Neurons\ActivationNeuron.cs" />

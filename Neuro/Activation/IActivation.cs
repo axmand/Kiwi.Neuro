@@ -3,7 +3,7 @@
     /// <summary>
     /// 激活函数
     /// </summary>
-    public interface IActivationFunction
+    public interface IActivation
     {
         /// <summary>
         /// Calculates function value.

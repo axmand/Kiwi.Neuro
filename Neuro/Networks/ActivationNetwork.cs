@@ -57,7 +57,6 @@ namespace Neuro.Networks
             this.output = output;
             return output;
         }
-
         /// <summary>
         /// Randomize layers of the network.
         /// </summary>
@@ -66,7 +65,6 @@ namespace Neuro.Networks
             foreach (ActivationLayer layer in Layers)
                 layer.Randomize();
         }
-
         /// <summary>
         /// Save network to specified file.
         /// </summary>
@@ -76,7 +74,6 @@ namespace Neuro.Networks
             Save(stream);
             stream.Close();
         }
-
         /// <summary>
         /// Save network to specified file.
         /// </summary>
@@ -85,7 +82,6 @@ namespace Neuro.Networks
             IFormatter formatter = new BinaryFormatter();
             formatter.Serialize(stream, this);
         }
-
         /// <summary>
         /// Load network from specified file.
         /// </summary>
@@ -96,7 +92,6 @@ namespace Neuro.Networks
             stream.Close();
             return network;
         }
-
         /// <summary>
         /// Load network from specified file.
         /// </summary>
@@ -106,11 +101,10 @@ namespace Neuro.Networks
             ActivationNetwork network = (ActivationNetwork)formatter.Deserialize(stream);
             return network;
         }
-
         /// <summary>
         /// Initializes a new instance of the <see cref="ActivationNetwork"/> class.
         /// </summary>
-        public ActivationNetwork(IActivationFunction function, int inputsCount, params int[] neuronsCount)
+        public ActivationNetwork(IActivation function, int inputsCount, params int[] neuronsCount)
         {
             this.inputsCount = Math.Max(1, inputsCount);
             layersCount = Math.Max(1, layersCount);
@@ -128,15 +122,13 @@ namespace Neuro.Networks
                     function);
             }
         }
-
         /// <summary>
         /// Set new activation function for all neurons of the network.
         /// </summary>
-        public void SetActivationFunction(IActivationFunction function)
+        public void SetActivationFunction(IActivation function)
         {
             for (int i = 0; i < Layers.Length; i++)
                 Layers[i].SetActivationFunction(function);
         }
-
     }
 }

@@ -71,7 +71,7 @@ namespace Neuro.Layers
         /// Initializes a new instance of the ActivationLayer class.
         /// The new layer is randomized after it is created.
         /// </summary>
-        public ActivationLayer(int neuronsCount, int inputsCount, IActivationFunction function)
+        public ActivationLayer(int neuronsCount, int inputsCount, IActivation function)
         {
             // the input count
             InputsCount = Math.Max(1, inputsCount);
@@ -87,7 +87,7 @@ namespace Neuro.Layers
         /// <summary>
         /// Set new activation function for all neurons of the layer.
         /// </summary>
-        public void SetActivationFunction(IActivationFunction function)
+        public void SetActivationFunction(IActivation function)
         {
             for (int i = 0; i < neurons.Length; i++)
                 neurons[i].ActivationFunction = function;

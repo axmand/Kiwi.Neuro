@@ -36,7 +36,7 @@ namespace Neuro.Neurons
         /// Initializes a new instance of the Neuron class.
         /// warning: input = size_total
         /// </summary>
-        public RecurrentNeuron(int inputsCount, int totalCount, IActivationFunction function)
+        public RecurrentNeuron(int inputsCount, int totalCount, IActivation function)
         {
             // allocate weights
             InputsCount = Math.Max(1, inputsCount);
@@ -72,7 +72,7 @@ namespace Neuro.Neurons
         /// <summary>
         /// Neuron's activation function.
         /// </summary>
-        public IActivationFunction ActivationFunction { get; set; }
+        public IActivation ActivationFunction { get; set; }
 
         /// <summary>
         /// Computes output value of neuron.

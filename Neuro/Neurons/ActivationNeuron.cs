@@ -52,7 +52,7 @@ namespace Neuro.Neurons
         /// <summary>
         /// Initializes a new instance of the Neuron class.
         /// </summary>
-        public ActivationNeuron(int inputs,IActivationFunction function)
+        public ActivationNeuron(int inputs,IActivation function)
         {
             // allocate weights
             inputsCount = Math.Max(1, inputs);
@@ -92,7 +92,7 @@ namespace Neuro.Neurons
         /// <summary>
         /// Neuron's activation function.
         /// </summary>
-        public IActivationFunction ActivationFunction { get; set; }
+        public IActivation ActivationFunction { get; set; }
 
         /// <summary>
         /// Computes output value of neuron.

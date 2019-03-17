@@ -3,7 +3,7 @@ using System;
 
 namespace Neuro.Activation
 {
-    public class SigmoidFunction : IActivationFunction, ICloneable
+    public class SigmoidFunction : IActivation, ICloneable
     {
         /// <summary>
         /// Sigmoid's alpha value.

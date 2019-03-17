@@ -7,7 +7,7 @@ namespace Neuro.Activation
     /// Relu 激活函数
     /// </summary>
     [Serializable]
-    public class ReluFunction : IActivationFunction, ICloneable
+    public class ReluFunction : IActivation, ICloneable
     {
         /// <summary>
         /// Calculates function value.

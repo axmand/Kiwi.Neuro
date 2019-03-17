@@ -50,7 +50,7 @@ namespace UnitTests
         public void DeepNeuralNetwork()
         {
             //build neural network
-            IActivationFunction activefunc = new SigmoidFunction();
+            IActivation activefunc = new SigmoidFunction();
             ActivationNetwork network = new ActivationNetwork(activefunc, 12, 24, 10, 10, 1);
             //network.Randomize();
             BackPropagationLearning teacher = new BackPropagationLearning(network) { Momentum = 0.9, LearningRate = 0.1 };
